@@ -1,6 +1,7 @@
 {
-  "version": "1.0.0",
   "devPort": 3000,
+  "servePort": 3001,
+  "studioPort": 3002,
   "appType": "rekit-react",
   "plugins": [],
   "folders": [
