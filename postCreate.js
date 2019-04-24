@@ -1,3 +1,4 @@
+/* global rekit */
 'use strict';
 
 /* eslint "no-use-before-define": 0 */
@@ -8,18 +9,18 @@
 const path = require('path');
 const fs = require('fs');
 
-const prjPath = __dirname;
-const pkgJsonPath = path.join(prjPath, 'package.json');
+const prjDir = __dirname;
+const pkgJsonPath = path.join(prjDir, 'package.json');
 
 function postCreate(args) {
   handleSassArgument(args);
 
   // Empty readme
-  fs.writeFileSync(path.join(prjPath, 'README.md'), '# README\n');
+  fs.writeFileSync(path.join(prjDir, 'README.md'), '# README\n');
 
   // Remove unnecessary files
   ['.travis.yml', 'yarn.lock', 'rekit.md', 'LICENSE']
-    .map(f => path.join(prjPath, f))
+    .map(f => path.join(prjDir, f))
     .forEach(file => fs.existsSync(file) && fs.unlinkSync(file));
 
   // Clean package.json
@@ -28,6 +29,21 @@ function postCreate(args) {
   delete pkgJson.dependencies['codecov']; // eslint-disable-line
   delete pkgJson.scripts['codecov']; // eslint-disable-line
   fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, '  '));
+
+  // Remove examples code if necessary
+  if (!args.examples && args.examples === 'false') {
+    try {
+      // rekit.core.paths.setProjectRoot(prjDir);
+      // rekit.core.handleCommand({
+      //   commandName: 'remove',
+      //   type: 'feature',
+      //   name: 'examples',
+      // });
+      // rekit.core.vio.flush();
+    } catch (err) {
+      // rekit.core.logger.warn('Failed to remove examples feature.', err);
+    }
+  }
 }
 
 function handleSassArgument(args) {
@@ -42,7 +58,7 @@ function handleSassArgument(args) {
     delete pkgJson.dependencies['node-sass-chokidar'];
     // Use webpack sass-loader
 
-    const configPath = path.join(prjPath, 'config/webpack.config.js');
+    const configPath = path.join(prjDir, 'config/webpack.config.js');
     const text = fs
       .readFileSync(configPath)
       .toString()
@@ -57,13 +73,13 @@ function handleSassArgument(args) {
     fs.writeFileSync(configPath, text);
 
     // Rename css to less in rekit config
-    const rekitConfigPath = path.join(prjPath, 'rekit.json');
+    const rekitConfigPath = path.join(prjDir, 'rekit.json');
     const rekitConfig = JSON.parse(fs.readFileSync(rekitConfigPath));
     rekitConfig.css = 'less';
     fs.writeFileSync(rekitConfigPath, JSON.stringify(rekitConfig, null, '  '));
 
     // Rename .scss to .less in src/index.js
-    const indexJsPath = path.join(prjPath, 'src/index.js');
+    const indexJsPath = path.join(prjDir, 'src/index.js');
     const newContent = fs
       .readFileSync(indexJsPath)
       .toString()
@@ -73,7 +89,7 @@ function handleSassArgument(args) {
     // Rename files extension to 'less'
     ['src/features/home', 'src/features/examples', 'src/features/common', 'src/styles'].forEach(
       folder => {
-        const fullFolderPath = path.join(prjPath, folder);
+        const fullFolderPath = path.join(prjDir, folder);
         fs.readdirSync(fullFolderPath).forEach(file => {
           if (/\.scss$/.test(file)) {
             const fullFilePath = path.join(fullFolderPath, file);
