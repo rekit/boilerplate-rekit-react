@@ -31,17 +31,23 @@ function postCreate(args) {
   fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, '  '));
 
   // Remove examples code if necessary
-  if (!args.examples && args.examples === 'false') {
+  if (args.clean || (args.hasOwnProperty('examples') && !args.examples)) {
+    // - args.clean is used when create from cli (for legacy compatibility)
+    // - args.examples is from Rekit Studio UI.
     try {
-      // rekit.core.paths.setProjectRoot(prjDir);
-      // rekit.core.handleCommand({
-      //   commandName: 'remove',
-      //   type: 'feature',
-      //   name: 'examples',
-      // });
-      // rekit.core.vio.flush();
+      rekit.core.paths.setProjectRoot(prjDir);
+      rekit.core.handleCommand({
+        commandName: 'remove',
+        type: 'feature',
+        name: 'examples',
+      });
+      rekit.core.vio.flush({ silent: true });
     } catch (err) {
-      // rekit.core.logger.warn('Failed to remove examples feature.', err);
+      rekit.core.logger.warn('Failed to remove examples feature: ', err);
+      rekit.core.logger.info(
+        'However project is created successfully just examples code is still in the project.',
+      );
+      rekit.core.logger.info('You can remove the examples code by deleting feature "examples".');
     }
   }
 }
