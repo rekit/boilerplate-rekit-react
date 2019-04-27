@@ -50,12 +50,6 @@ export class DefaultPage extends Component {
               To see examples, access:&nbsp;
               <Link to="/examples">/examples</Link>
             </li>
-            <li>
-              Rekit Studio is running at:&nbsp;
-              <a href="http://localhost:6076/" target="_blank" rel="noopener noreferrer">
-                http://localhost:6076/
-              </a>.
-            </li>
           </ul>
         </div>
       </div>

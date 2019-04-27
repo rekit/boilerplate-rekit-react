@@ -14,5 +14,5 @@
     "postCreate.js",
     "rekit.json"
   ],
-  "css": "sass"
+  "css": "scss"
 }
