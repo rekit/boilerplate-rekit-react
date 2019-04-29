@@ -3,6 +3,7 @@
   "servePort": 3001,
   "studioPort": 3002,
   "appType": "rekit-react",
+  "rekitTest": true,
   "plugins": [],
   "folders": [
     "public",
