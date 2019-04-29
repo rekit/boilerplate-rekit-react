@@ -1,22 +1,14 @@
 @import '../../styles/mixins';
 
-.home-default-page {
+.home-welcome-page {
   text-align: center;
   .app {
     text-align: center;
   }
 
-  .app-logo {
+  .rekit-logo {
     animation: app-logo-spin infinite 10s linear;
     height: 80px;
-  }
-
-  .rekit-logo {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    opacity: 0.08;
-    height: 190px;
   }
 
   .app-header {
