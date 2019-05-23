@@ -4,16 +4,7 @@
   "studioPort": 3002,
   "appType": "rekit-react",
   "rekitTest": true,
-  "plugins": [],
-  "folders": [
-    "public",
-    "config",
-    "scripts"
-  ],
-  "files": [
-    "package.json",
-    "postCreate.js",
-    "rekit.json"
-  ],
+  "exclude": [".*"],
+  "include": [],
   "css": "scss"
 }
