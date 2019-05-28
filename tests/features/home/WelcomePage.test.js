@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { WelcomePage } from '../../../src/features/home/DefaultPage';
+import { WelcomePage } from '../../../src/features/home/WelcomePage';
 
 describe('home/WelcomePage', () => {
   it('renders node with correct class name', () => {
@@ -10,6 +10,6 @@ describe('home/WelcomePage', () => {
     };
     const renderedComponent = shallow(<WelcomePage {...props} />);
 
-    expect(renderedComponent.find('.home-default-page').length).toBe(1);
+    expect(renderedComponent.find('.home-welcome-page').length).toBe(1);
   });
 });
