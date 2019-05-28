@@ -23,24 +23,16 @@ export class WelcomePage extends Component {
           <ul>
             <li>
               Edit component{' '}
-              <a
-                href="http://localhost:6076/element/src%2Ffeatures%2Fhome%2FDefaultPage.js/code"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <code>
                 src/features/home/DefaultPage.js
-              </a>{' '}
+              </code>{' '}
               for this page.
             </li>
             <li>
               Edit component{' '}
-              <a
-                href="http://localhost:6076/element/src%2Ffeatures%2Fhome%2FApp.js/code"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <code>
                 src/features/home/App.js
-              </a>{' '}
+              </code>{' '}
               for the root container layout.
             </li>
             <li>
