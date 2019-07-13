@@ -19,7 +19,7 @@ function postCreate(args) {
   fs.writeFileSync(path.join(prjDir, 'README.md'), '# README\n');
 
   // Remove unnecessary files
-  ['.travis.yml', 'yarn.lock', 'rekit.md', 'LICENSE']
+  ['.travis.yml', 'yarn.lock', 'rekit.md', 'tsconfig.json', 'custom.d.ts', 'LICENSE']
     .map(f => path.join(prjDir, f))
     .forEach(file => fs.existsSync(file) && fs.unlinkSync(file));
 
