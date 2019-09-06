@@ -49,15 +49,13 @@ function renderRouteConfigV3(routes, contextPath) {
   return <Switch>{children}</Switch>;
 }
 
-class Root extends React.Component {
-  render() {
-    const children = renderRouteConfigV3(routeConfig, '/');
-    return (
-      <Provider store={store}>
-        <ConnectedRouter history={history}>{children}</ConnectedRouter>
-      </Provider>
-    );
-  }
+function Root() {
+  const children = renderRouteConfigV3(routeConfig, '/');
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>{children}</ConnectedRouter>
+    </Provider>
+  );
 }
 
 export default hot(module)(Root);

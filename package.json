@@ -29,6 +29,7 @@
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "7.11.1",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "file-loader": "2.0.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
@@ -54,9 +55,9 @@
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.6.4",
-    "react-redux": "^6.0.0",
-    "react-router-dom": "^4.3.1",
+    "react-hot-loader": "^4.12.12",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
@@ -75,9 +76,6 @@
     "start": "cross-env PORT=3100 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",

@@ -1,13 +1,19 @@
-// Rekit uses a new approach to organizing actions and reducers. That is
-// putting related actions and reducers in one file. See more at:
-// https://medium.com/@nate_wang/a-new-approach-for-managing-redux-actions-91c26ce8b5da
-
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { EXAMPLES_COUNTER_PLUS_ONE } from './constants';
 
 export function counterPlusOne() {
   return {
     type: EXAMPLES_COUNTER_PLUS_ONE,
   };
+}
+
+export function useCounterPlusOne() {
+  const dispatch = useDispatch();
+  const count = useSelector(state => state.examples.count);
+  const boundAction = useCallback(() => dispatch(counterPlusOne()), [dispatch]);
+
+  return { count, counterPlusOne: boundAction };
 }
 
 export function reducer(state, action) {

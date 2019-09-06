@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {
   EXAMPLES_FETCH_REDDIT_LIST_BEGIN,
   EXAMPLES_FETCH_REDDIT_LIST_SUCCESS,
@@ -40,7 +42,7 @@ export function fetchRedditList(args = {}) {
             data: { error: err },
           });
           reject(err);
-        }
+        },
       );
     });
 
@@ -53,6 +55,45 @@ export function fetchRedditList(args = {}) {
 export function dismissFetchRedditListError() {
   return {
     type: EXAMPLES_FETCH_REDDIT_LIST_DISMISS_ERROR,
+  };
+}
+
+
+export function useFetchRedditList(args) {
+  // args: false value or array
+  // if array, means args passed to the action creator
+  const dispatch = useDispatch();
+
+  const { redditList, fetchRedditListPending, fetchRedditListError } = useSelector(
+    state => ({
+      redditList: state.examples.redditList,
+      fetchRedditListPending: state.examples.fetchRedditListPending,
+      fetchRedditListError: state.examples.fetchRedditListError,
+    }),
+    shallowEqual,
+  );
+
+  const boundAction = useCallback(
+    (...args) => {
+      dispatch(fetchRedditList(...args));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    if (args) boundAction(...(args||[]));
+  }, [...(args || [])]);
+
+  const boundDismissFetchRedditListError = useCallback(() => {
+    dispatch(dismissFetchRedditListError());
+  }, [dispatch]);
+
+  return {
+    redditList,
+    fetchRedditList: boundAction,
+    fetchRedditListPending,
+    fetchRedditListError,
+    dismissFetchRedditListError: boundDismissFetchRedditListError,
   };
 }
 
@@ -95,3 +136,4 @@ export function reducer(state, action) {
       return state;
   }
 }
+
