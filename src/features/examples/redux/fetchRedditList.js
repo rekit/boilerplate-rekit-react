@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import {
   EXAMPLES_FETCH_REDDIT_LIST_BEGIN,
@@ -10,7 +10,7 @@ import {
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function fetchRedditList(args = {}) {
+export function fetchRedditList() {
   return dispatch => {
     // optionally you can have getState as the second argument
     dispatch({
@@ -58,8 +58,7 @@ export function dismissFetchRedditListError() {
   };
 }
 
-
-export function useFetchRedditList(args) {
+export function useFetchRedditList() {
   // args: false value or array
   // if array, means args passed to the action creator
   const dispatch = useDispatch();
@@ -74,15 +73,11 @@ export function useFetchRedditList(args) {
   );
 
   const boundAction = useCallback(
-    (...args) => {
-      dispatch(fetchRedditList(...args));
+    () => {
+      dispatch(fetchRedditList());
     },
     [dispatch],
   );
-
-  useEffect(() => {
-    if (args) boundAction(...(args||[]));
-  }, [...(args || [])]);
 
   const boundDismissFetchRedditListError = useCallback(() => {
     dispatch(dismissFetchRedditListError());
