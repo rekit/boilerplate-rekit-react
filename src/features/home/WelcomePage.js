@@ -12,7 +12,7 @@ export default function WelcomePage() {
         <h3>To get started:</h3>
         <ul>
           <li>
-            Edit component <code>src/features/home/DefaultPage.js</code> for this page.
+            Edit component <code>src/features/home/WelcomePage.js</code> for this page.
           </li>
           <li>
             Edit component <code>src/features/home/App.js</code> for the root container layout.
